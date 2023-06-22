@@ -27,7 +27,7 @@ document.getElementById("button1").addEventListener("click", function () {
         var db = event.target.result;
         var objectStore = db.createObjectStore("emptime", { keyPath: "id", autoIncrement: true });
         objectStore.createIndex("EmployeeID", "EmployeeID", { unique: false });
-
+        objectStore.createIndex("Date", "Date", { unique: false });
         objectStore.createIndex("PunchIn", "PunchIn", { unique: false });
         objectStore.createIndex("PunchOut", "PunchOut", { unique: false });
 
@@ -127,13 +127,13 @@ function addUser(EmployeeID, Empmail, Empname, Empassword, Empproject, ProjProg,
     };
 }
 
-function addtime(EmployeeID,PunchIn,PunchOut) {
+function addtime(EmployeeID,Date,PunchIn,PunchOut) {
     var request = indexedDB.open("TimeSheet", 1);
     request.onsuccess = function (event) {
         var db = event.target.result;
         var transaction = db.transaction(["emptime"], "readwrite");
         var objectStore = transaction.objectStore("emptime");
-        var user = { EmployeeID: EmployeeID, PunchIn:PunchIn, PunchOut:PunchOut};
+        var user = { EmployeeID: EmployeeID,Date:Date, PunchIn:PunchIn, PunchOut:PunchOut};
         var request = objectStore.add(user);
         request.onsuccess = function (event) {
             console.log("time added ");

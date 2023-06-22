@@ -12,10 +12,10 @@ sign_in_btn.addEventListener('click', () => {
 
 //code by surya  
 
-console.log("welcome to  login maker  \n-------------------------------------");
+console.log("welcome to  login maker-------------------------------------");
 
 console.log("Creating User Database table ");
- 
+
 // Open the database
 var request = indexedDB.open("Emplogin", 1);
 // Create the object store
@@ -30,44 +30,44 @@ request.onupgradeneeded = function (event) {
   objectStore.createIndex("ProjProg", "ProjProg", { unique: false });
   objectStore.createIndex("Overtime", "Overtime", { unique: false });
   objectStore.createIndex("Leave", "Leave", { unique: false });
-  
+
 };
 // Insert a user
-function addUser(EmployeeID, Empmail, Empname, Empassword,Empproject,ProjProg, ProjPriority,Overtime,Leave) {
+function addUser(EmployeeID, Empmail, Empname, Empassword, Empproject, ProjProg, ProjPriority, Overtime, Leave) {
   var request = indexedDB.open("Emplogin", 1);
   request.onsuccess = function (event) {
-      var db = event.target.result;
-      var transaction = db.transaction(["EmpTable"], "readwrite");
-      var objectStore = transaction.objectStore("EmpTable");
-      var user = { EmployeeID: EmployeeID, Empmail: Empmail, Empname: Empname, Empassword: Empassword, Empproject:Empproject ,ProjProg:ProjProg ,ProjPriority:ProjPriority,Overtime:Overtime,Leave:Leave};
-      var request = objectStore.add(user);
-      request.onsuccess = function (event) {
-          console.log("Employee added to the database");
-          location.reload();
-      };
-      request.onerror = function (event) {
-          console.log("Error adding user to the database");
-      };
+    var db = event.target.result;
+    var transaction = db.transaction(["EmpTable"], "readwrite");
+    var objectStore = transaction.objectStore("EmpTable");
+    var user = { EmployeeID: EmployeeID, Empmail: Empmail, Empname: Empname, Empassword: Empassword, Empproject: Empproject, ProjProg: ProjProg, ProjPriority: ProjPriority, Overtime: Overtime, Leave: Leave };
+    var request = objectStore.add(user);
+    request.onsuccess = function (event) {
+      console.log("Employee added to the database");
+      location.reload();
+    };
+    request.onerror = function (event) {
+      console.log("Error adding user to the database");
+    };
   };
 }
-document.getElementById("btn_signup").addEventListener("click",registerEmployee);
+document.getElementById("btn_signup").addEventListener("click", registerEmployee);
 
-function registerEmployee(){
+function registerEmployee() {
 
-let signupname= document.getElementById("signupname").value;
-let signupemail=document.getElementById("signupemail").value;
-let signuppassword=document.getElementById("signuppass").value;
-
-
-let empid = (parseInt(localStorage.getItem("patternofid"))+1).toString()
-console.log(empid);
+  let signupname = document.getElementById("signupname").value;
+  let signupemail = document.getElementById("signupemail").value;
+  let signuppassword = document.getElementById("signuppass").value;
 
 
-addUser(empid,signupemail,signupname,signuppassword,"","","","","");
-rowcount= localStorage.getItem("rowcount");
-rowcount=parseInt(rowcount)+1;
-localStorage.setItem("patternofid",empid);
-localStorage.setItem("rowcount",rowcount);
+  let empid = (parseInt(localStorage.getItem("patternofid")) + 1).toString()
+  console.log(empid);
+
+
+  addUser(empid, signupemail, signupname, signuppassword, "", "", "", "", "");
+  rowcount = localStorage.getItem("rowcount");
+  rowcount = parseInt(rowcount) + 1;
+  localStorage.setItem("patternofid", empid);
+  localStorage.setItem("rowcount", rowcount);
 
 }
 
@@ -100,9 +100,9 @@ var getUserByUsername = function (EmployeeID, callback) {
 document.getElementById("loginevent").addEventListener("click", checkforlogin);
 function checkforlogin() {
   let EmpIDlogin = document.getElementById("logEmpid").value;
-  let Emploginpass= document.getElementById("logEmpPass").value;
+  let Emploginpass = document.getElementById("logEmpPass").value;
 
-  
+
   getUserByUsername(EmpIDlogin, function (user) {
     if (user) {
       console.log("Found user:", user);
@@ -111,7 +111,7 @@ function checkforlogin() {
         localStorage.setItem("nameofemp", nameofemp);
         window.location.href = "dashboard/empdash/dashboard.html"
       }
-      else{
+      else {
         alert("Please enter correct Username and password")
       }
 
@@ -125,6 +125,6 @@ function checkforlogin() {
 }
 
 document.getElementById("admin-login-btn").addEventListener("click", adminpagenav);
-function adminpagenav(){
+function adminpagenav() {
   window.location.href = "admin/admin_login.html";
 }
