@@ -28,6 +28,7 @@ request.onupgradeneeded = function (event) {
   objectStore.createIndex("Empassword", "Empassword", { unique: false });
   objectStore.createIndex("Empproject", "Empproject", { unique: false });
   objectStore.createIndex("ProjProg", "ProjProg", { unique: false });
+  objectStore.createIndex("ProjPriority", "ProjPriority", { unique: false });
   objectStore.createIndex("Overtime", "Overtime", { unique: false });
   objectStore.createIndex("Leave", "Leave", { unique: false });
 

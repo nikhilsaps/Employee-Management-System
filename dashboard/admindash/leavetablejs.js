@@ -71,17 +71,21 @@ request.onsuccess = function (event) {
     function filterTableRows() {
       const filterInput = document.getElementById('date-filter');
       const filterValue = filterInput.value;
-
-      const filteredRecords = records.filter(function (record) {
-        return record.date === filterValue;
-      });
-
+    
+      let filteredRecords = records;
+    
+      if (filterValue) {
+        filteredRecords = records.filter(function (record) {
+          return record.date === filterValue;
+        });
+      }
+    
       generateTableRows(filteredRecords);
     }
 
     // Attach event listener to the date filter input
     const filterInput = document.getElementById('date-filter');
-    filterInput.addEventListener('input', filterTableRows);
+    filterInput.addEventListener('change', filterTableRows);
   };
 
   // Handle errors
