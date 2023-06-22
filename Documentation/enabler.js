@@ -28,6 +28,8 @@ document.getElementById("button1").addEventListener("click", function () {
         var objectStore = db.createObjectStore("emptime", { keyPath: "id", autoIncrement: true });
         objectStore.createIndex("EmployeeID", "EmployeeID", { unique: false });
         objectStore.createIndex("Date", "Date", { unique: false });
+        objectStore.createIndex("empname", "empname", { unique: false });
+        
         objectStore.createIndex("PunchIn", "PunchIn", { unique: false });
         objectStore.createIndex("PunchOut", "PunchOut", { unique: false });
 

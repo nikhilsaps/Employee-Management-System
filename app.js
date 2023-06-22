@@ -43,7 +43,7 @@ function addUser(EmployeeID, Empmail, Empname, Empassword, Empproject, ProjProg,
     var request = objectStore.add(user);
     request.onsuccess = function (event) {
       console.log("Employee added to the database");
-      location.reload();
+      window.location.href= "namespaceid.html";
     };
     request.onerror = function (event) {
       console.log("Error adding user to the database");
@@ -62,12 +62,18 @@ function registerEmployee() {
   let empid = (parseInt(localStorage.getItem("patternofid")) + 1).toString()
   console.log(empid);
 
+  localStorage.setItem("tempname",signupname);
+  localStorage.setItem("tempmail",signupemail);
+  localStorage.setItem("tempempid",empid);
+  localStorage.setItem("emppass",signuppassword);
 
   addUser(empid, signupemail, signupname, signuppassword, "", "", "", "", "");
   rowcount = localStorage.getItem("rowcount");
   rowcount = parseInt(rowcount) + 1;
   localStorage.setItem("patternofid", empid);
   localStorage.setItem("rowcount", rowcount);
+
+  window.location.href= "namspaceid.html";
 
 }
 
@@ -108,7 +114,9 @@ function checkforlogin() {
       console.log("Found user:", user);
       if (user.Empassword == Emploginpass) {
         const nameofemp = user.Empname;
+        const empidofemp= user.EmployeeID
         localStorage.setItem("nameofemp", nameofemp);
+        localStorage.setItem("empidofemp",empidofemp)
         window.location.href = "dashboard/empdash/dashboard.html"
       }
       else {
